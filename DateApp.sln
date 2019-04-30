@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateApp", "DateApp\DateApp.csproj", "{59E546DC-E367-4014-ACA8-FDB32D1B3708}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59E546DC-E367-4014-ACA8-FDB32D1B3708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E546DC-E367-4014-ACA8-FDB32D1B3708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E546DC-E367-4014-ACA8-FDB32D1B3708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E546DC-E367-4014-ACA8-FDB32D1B3708}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D18B71E-95CF-4CE8-B760-46E6238A5EB1}
+	EndGlobalSection
+EndGlobal
