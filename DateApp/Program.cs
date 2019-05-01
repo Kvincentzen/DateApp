@@ -10,6 +10,8 @@ namespace DateApp
     {
         static void Main(string[] args)
         {
+            SqlCommands.addPerson("Kristian");
+            Console.ReadKey();
         }
     }
 }
