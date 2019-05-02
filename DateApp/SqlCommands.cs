@@ -9,19 +9,19 @@ namespace DateApp
 {
     class SqlCommands
     {
-        public static void addPerson(string Name)
+        public static void createUser(string Username, string Pass)
         {
-            var connection = new MySqlConnection("server=kvincentzen.com.mysql.service.one.com; port=3306; database=kvincentzen_com; uid=kvincentzen_com; PASSWORD=R6ZzF2BduHv3Mf8o2JzbkzsB; ");
+            var connection = new MySqlConnection("SERVER=46.30.215.64; PORT=3306; DATABASE=kvincentzen_com;UID=kvincentzen_com@10.27.22.48; PASSWORD=Passw0rd1234!; ");
             MySqlCommand cmd;
             connection.Open();
 
             try
             {
                 cmd = connection.CreateCommand();
-                cmd.CommandText = "INSERT INTO Person(Name) values('" + Name + "');";
+                cmd.CommandText = "INSERT INTO USER(Username, Password) values('" + Username + ", "+ Pass +"');";
                 cmd.ExecuteNonQuery();
 
-                Console.WriteLine("Tilføjede " + Name + " til Person database.");
+                Console.WriteLine("Tilføjede " + Username + " til Person database.");
                 Console.ReadKey();
             }
             catch (Exception)
@@ -35,6 +35,10 @@ namespace DateApp
                     connection.Close();
                 }
             }
+        }
+        public static void loginUser(string user, string pass)
+        {
+
         }
         //static void showData()
         //{
