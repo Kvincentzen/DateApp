@@ -11,7 +11,7 @@ namespace DateApp
     {
         public static void createUser(string Username, string Pass)
         {
-            var connection = new MySqlConnection("SERVER=46.30.215.64; PORT=3306; DATABASE=kvincentzen_com;UID=kvincentzen_com@10.27.22.48; PASSWORD=Passw0rd1234!; ");
+            var connection = new MySqlConnection("SERVER=.;UID=kvincentzen_com@10.27.22.48; PASSWORD=Passw0rd1234!; ");
             MySqlCommand cmd;
             connection.Open();
 

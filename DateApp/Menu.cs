@@ -39,6 +39,7 @@ namespace DateApp
                     }
                 } while (d == 0);
                 SqlCommands.createUser(u, p);
+
             }
             if (i == 2)
             {
