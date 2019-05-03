@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace DateApp
 {
@@ -11,14 +11,14 @@ namespace DateApp
     {
         public static void createUser(string Username, string Pass)
         {
-            var connection = new MySqlConnection("SERVER=.;UID=kvincentzen_com@10.27.22.48; PASSWORD=Passw0rd1234!; ");
-            MySqlCommand cmd;
+            var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
+            SqlCommand cmd;
             connection.Open();
 
             try
             {
                 cmd = connection.CreateCommand();
-                cmd.CommandText = "INSERT INTO USER(Username, Password) values('" + Username + ", "+ Pass +"');";
+                cmd.CommandText = "INSERT INTO USERS(USERNAME, PASS) values('" + Username + "', '"+ Pass +"');";
                 cmd.ExecuteNonQuery();
 
                 Console.WriteLine("Tilføjede " + Username + " til Person database.");
