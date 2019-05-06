@@ -55,7 +55,34 @@ namespace DateApp
             {
                 Console.WriteLine("Forkert tastning, du kan kun vælge imellem 1 og 2");
             }
+
             Console.ReadKey();
+
+        }
+        public static void matchMenu()
+        {
+
+        }
+        public static void userProfil(string user)
+        {
+            
+            Console.WriteLine("");
+            Console.WriteLine("Hvad vil du redigere ?");
+            Console.WriteLine("1. Person Info");
+            Console.WriteLine("2.Interesser");
+            Console.WriteLine("3.");
+            int v = Convert.ToInt32(Console.ReadLine());
+            if (v == 1) {
+
+            }
+            if (v == 2)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }

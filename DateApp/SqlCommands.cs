@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace DateApp
@@ -21,7 +22,7 @@ namespace DateApp
                 cmd.CommandText = "INSERT INTO USERS(USERNAME, PASS) values('" + Username + "', '"+ Pass +"');";
                 cmd.ExecuteNonQuery();
 
-                Console.WriteLine("Tilføjede " + Username + " til Person database.");
+                Console.WriteLine("Tilføjede " + Username + " til User databasen.");
                 Console.ReadKey();
             }
             catch (Exception)
@@ -38,7 +39,30 @@ namespace DateApp
         }
         public static void loginUser(string user, string pass)
         {
+            var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
+            SqlCommand cmd;
+            connection.Open();
 
+            try
+            {
+                cmd = connection.CreateCommand();
+                cmd.CommandText = "SELECT FROM USERS WHERE USERNAME = '"+user+"' AND PASS = '"+pass+"'";
+                cmd.ExecuteNonQuery();
+
+                Console.WriteLine("Tilføjede " + Username + " til User databasen.");
+                Console.ReadKey();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
         }
         //static void showData()
         //{
@@ -88,6 +112,29 @@ namespace DateApp
         //    connection.Close();
         //}
 
+        public class PullDataTest
+        {
+            private DataTable dataTable = new DataTable();
 
+            //public PullDataTest()
+            //{
+            //}
+
+
+            public void PullData(string user)
+            {
+                var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
+                string query = "SELECT * FROM USERPROFIL WHERE USER ID ='"+user+"'";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                connection.Open();
+
+                // create data adapter
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                // this will query your database and return the result to your datatable
+                da.Fill(dataTable);
+                connection.Close();
+                da.Dispose();
+            }
+        }
     }
 }
