@@ -46,7 +46,44 @@ namespace DateApp
             try
             {
                 cmd = connection.CreateCommand();
-                cmd.CommandText = "SELECT FROM USERS WHERE USERNAME = '"+user+"' AND PASS = '"+pass+"'";
+                cmd.CommandText = "SELECT * FROM USERS WHERE USERNAME = '"+user+"' AND PASS = '"+pass+"'";
+                cmd.ExecuteNonQuery();
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds);
+
+                bool loginSuccessful = ((ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0));
+                if (loginSuccessful)
+                {
+                }
+                else
+                {
+                    Console.WriteLine("Invalid username or password");
+                    Console.ReadKey();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+        public static string findUserID(string u, string p)
+        {
+            var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
+            SqlCommand cmd;
+            connection.Open();
+
+            try
+            {
+                cmd = connection.CreateCommand();
+                cmd.CommandText = "";
                 cmd.ExecuteNonQuery();
 
                 Console.WriteLine("Tilføjede " + Username + " til User databasen.");
@@ -63,6 +100,7 @@ namespace DateApp
                     connection.Close();
                 }
             }
+            return UserID;
         }
         //static void showData()
         //{
