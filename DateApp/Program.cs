@@ -10,9 +10,12 @@ namespace DateApp
     {
         static void Main(string[] args)
         {
-            //SqlCommands.loginUser("Kristian","Password");
-            Menu.startMenu();
+            //SqlCommands.createUser("Kristian", "Password");
+            //Menu.startMenu();
             //Menu.valgMenu("Kristian","Password");
+            //var UID = SqlCommands.findUserID("Kristian3");
+            //Console.WriteLine(UID);
+            SqlCommands.pullData(1);
             Console.ReadKey();
         }
     }

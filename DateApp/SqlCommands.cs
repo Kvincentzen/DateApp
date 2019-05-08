@@ -37,6 +37,56 @@ namespace DateApp
                 }
             }
         }
+        public static void createUProfil(string fname, string lname, int age, string height, string kilo, int uID)
+        {
+            var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
+            SqlCommand cmd;
+            connection.Open();
+
+            try
+            {
+                cmd = connection.CreateCommand();
+                cmd.CommandText = "INSERT INTO USERPROFIL(FNAME, LNAME, AGE, HEIGHT,KILO,USERID) values('" + fname + "', '" + lname +"', '" + age +"', '" + height +"', '" + kilo +"', '" + uID + "');";
+                cmd.ExecuteNonQuery();
+                Console.ReadKey();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+        public static void createUProfil(string fname, int age, string height, string kilo, int uID)
+        {
+            var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
+            SqlCommand cmd;
+            connection.Open();
+
+            try
+            {
+                cmd = connection.CreateCommand();
+                cmd.CommandText = "INSERT INTO USERPROFIL(FNAME, AGE, HEIGHT,KILO,USERID) values('" + fname + "', '" + age + "', '" + height + "', '" + kilo + "', '" + uID + "');";
+                cmd.ExecuteNonQuery();
+                Console.ReadKey();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
         public static void loginUser(string user, string pass)
         {
             var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
@@ -74,20 +124,18 @@ namespace DateApp
                 }
             }
         }
-        public static string findUserID(string u, string p)
+        public static int findUserID(string u)
         {
             var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
             SqlCommand cmd;
+            int UserID;
             connection.Open();
 
             try
             {
                 cmd = connection.CreateCommand();
-                cmd.CommandText = "";
-                cmd.ExecuteNonQuery();
-
-                Console.WriteLine("Tilføjede " + Username + " til User databasen.");
-                Console.ReadKey();
+                cmd.CommandText = "SELECT USERID FROM USERS WHERE USERNAME = '"+u+"'";
+                UserID = Convert.ToInt32(cmd.ExecuteScalar());
             }
             catch (Exception)
             {
@@ -150,29 +198,26 @@ namespace DateApp
         //    connection.Close();
         //}
 
-        public class PullDataTest
+        public static void pullData(int uID)
         {
-            private DataTable dataTable = new DataTable();
-
-            //public PullDataTest()
-            //{
-            //}
-
-
-            public void PullData(string user)
+            DataTable dataTable = new DataTable();
+            var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
+            string query = "SELECT * FROM USERPROFIL WHERE USERID ='" + uID + "'";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            connection.Open();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dataTable);
+            connection.Close();
+            foreach (DataRow data in dataTable.Rows)
             {
-                var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
-                string query = "SELECT * FROM USERPROFIL WHERE USER ID ='"+user+"'";
-                SqlCommand cmd = new SqlCommand(query, connection);
-                connection.Open();
+                Console.WriteLine(data["FNAME"].ToString() + " " + data["LNAME"].ToString());
+                Console.WriteLine("alder = "+data["AGE"].ToString());
+                Console.WriteLine("Højde = "+data["HEIGHT"].ToString());
+                Console.WriteLine("Vægt = "+data["KILO"].ToString());
+                Console.WriteLine("Køn = "+data["SEX"].ToString());
 
-                // create data adapter
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                // this will query your database and return the result to your datatable
-                da.Fill(dataTable);
-                connection.Close();
-                da.Dispose();
             }
+            da.Dispose();
         }
     }
 }

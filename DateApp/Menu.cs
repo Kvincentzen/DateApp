@@ -50,8 +50,8 @@ namespace DateApp
                 Console.WriteLine("Skriv Password");
                 p = Console.ReadLine();
                 SqlCommands.loginUser(u,p);
-                sqlCommands
-                valgMenu(u, p);
+                int uID = SqlCommands.findUserID(u);
+                valgMenu(uID);
             }
             else
             {
@@ -61,36 +61,36 @@ namespace DateApp
             Console.ReadKey();
 
         }
-        public static void valgMenu(string u, string p)
+        public static void valgMenu(int uID)
         {
             Console.Clear();
             Console.WriteLine("1.Check Matches");
-            Console.WriteLine("2.Rediger i din Profil");
+            Console.WriteLine("2.Opret/Rediger i din UserProfil");
             Console.WriteLine("3.Rediger i din SøgeProfil");
             int v = Convert.ToInt32(Console.ReadLine());
             if (v == 1)
             {
-                matchMenu(u, p);
+                matchMenu(uID);
             }
             if (v == 2)
             {
-
+                userProfil(uID);
             }
             if (v == 3)
             {
-
+                searchProfil(uID);
             }
             else
             {
-
+                valgMenu(uID);
             }
         }
-        public static void matchMenu(string u, string p)
+        public static void matchMenu(int uID)
         {
             Console.Clear();
             Console.WriteLine();
         }
-        public static void userProfil(string user)
+        public static void userProfil(int uID)
         {
             
             Console.WriteLine("Hvad vil du redigere ?");
@@ -114,7 +114,7 @@ namespace DateApp
 
             }
         }
-        public static void searchProfil()
+        public static void searchProfil(int uID)
         {
 
         }
