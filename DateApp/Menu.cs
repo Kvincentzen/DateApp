@@ -88,7 +88,13 @@ namespace DateApp
         public static void matchMenu(int uID)
         {
             Console.Clear();
-            Console.WriteLine();
+            Console.WriteLine("1.Find matches");
+            int v = Convert.ToInt32(Console.ReadLine());
+            if (v == 1)
+            {
+
+            }
+            else { }
         }
         public static void userProfil(int uID)
         {
