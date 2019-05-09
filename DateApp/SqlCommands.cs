@@ -37,7 +37,7 @@ namespace DateApp
                 }
             }
         }
-        public static void createUProfil(string fname, string lname, int age, string height, string kilo, int uID)
+        public static void createUProfil(string fname, string lname, int age, string height, string kilo, int sex, int uID)
         {
             var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
             SqlCommand cmd;
@@ -46,7 +46,7 @@ namespace DateApp
             try
             {
                 cmd = connection.CreateCommand();
-                cmd.CommandText = "INSERT INTO USERPROFIL(FNAME, LNAME, AGE, HEIGHT,KILO,USERID) values('" + fname + "', '" + lname +"', '" + age +"', '" + height +"', '" + kilo +"', '" + uID + "');";
+                cmd.CommandText = "INSERT INTO USERPROFIL(FNAME, LNAME, AGE, HEIGHT,KILO,SEX,USERID) values('" + fname + "', '" + lname +"', '" + age +"', '" + height +"', '" + kilo +"', '" + sex +"', '" + uID + "');";
                 cmd.ExecuteNonQuery();
                 Console.ReadKey();
             }
@@ -62,7 +62,7 @@ namespace DateApp
                 }
             }
         }
-        public static void createUProfil(string fname, int age, string height, string kilo, int uID)
+        public static void createUProfil(string fname, int age, string height, string kilo, int sex, int uID)
         {
             var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
             SqlCommand cmd;
@@ -71,7 +71,7 @@ namespace DateApp
             try
             {
                 cmd = connection.CreateCommand();
-                cmd.CommandText = "INSERT INTO USERPROFIL(FNAME, AGE, HEIGHT,KILO,USERID) values('" + fname + "', '" + age + "', '" + height + "', '" + kilo + "', '" + uID + "');";
+                cmd.CommandText = "INSERT INTO USERPROFIL(FNAME, AGE, HEIGHT,KILO,SEX,USERID) values('" + fname + "', '" + age + "', '" + height + "', '" + kilo + "', '" + sex + "', '" + uID + "');";
                 cmd.ExecuteNonQuery();
                 Console.ReadKey();
             }
@@ -197,7 +197,6 @@ namespace DateApp
 
         //    connection.Close();
         //}
-
         public static void pullData(int uID)
         {
             DataTable dataTable = new DataTable();
@@ -218,6 +217,46 @@ namespace DateApp
 
             }
             da.Dispose();
+        }
+        public static void findMatch(int uID)
+        {
+            var connection = new SqlConnection(@"Server =SKAB1-PC-03\SQLEXPRESS; Database = DATEDB; Trusted_Connection=True;");
+            SqlCommand cmd;
+            var sex = 0;
+            connection.Open();
+            try
+            {
+                cmd = connection.CreateCommand();
+                cmd.CommandText = "SELECT SEX FROM USERPROFIL WHERE USERID = " + uID + ";";
+                sex = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            if (sex == 1)
+            {
+                cmd.CommandText = "SELECT USERID FROM USERPROFIL WHERE SEX = 3;";
+            }
+            if (sex == 2)
+            {
+
+            }
+            if (sex == 3)
+            {
+
+            }
+            if (sex == 4)
+            {
+
+            }
         }
     }
 }

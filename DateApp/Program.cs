@@ -13,9 +13,10 @@ namespace DateApp
             //SqlCommands.createUser("Kristian", "Password");
             //Menu.startMenu();
             //Menu.valgMenu("Kristian","Password");
+            Menu.userProfil(1);
             //var UID = SqlCommands.findUserID("Kristian3");
             //Console.WriteLine(UID);
-            SqlCommands.pullData(1);
+            //SqlCommands.pullData(1);
             Console.ReadKey();
         }
     }
